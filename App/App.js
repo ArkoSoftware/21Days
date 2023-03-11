@@ -6,6 +6,7 @@ import * as Network from "expo-network";
 import { db, auth } from "./src/security/firebase";
 import { doc, getDoc } from "firebase/firestore/lite";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AuthProvider from "./src/contexts/AuthProvider";
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
@@ -41,7 +42,11 @@ const App = () => {
     return null;
   }
   LogBox.ignoreAllLogs();
-  return <AuthCheck />;
+  return (
+    <AuthProvider>
+      <AuthCheck />
+    </AuthProvider>
+  );
 };
 
 export default App;
