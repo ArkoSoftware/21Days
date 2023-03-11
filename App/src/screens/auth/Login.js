@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
   // GoogleSignin.configure({
   //   webClientId:'696569437747-3hum6ku5kmob5j3d9mdci5s30dkbsb0o.apps.googleusercontent.com'
   // })
-  const { signIn } = useContext(AuthContext);
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [email, setEmail] = useState("");
@@ -35,8 +35,6 @@ const Login = ({ navigation }) => {
   const [passwordError, setPasswordError] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [notificationId, setNotificationId] = useState(null);
-
-  
 
   const SubmitForm = () => {
     setLoading(true);
@@ -52,26 +50,29 @@ const Login = ({ navigation }) => {
         return;
       }
     } else {
-      signIn(email,password)
-      .then(async (data) => {
-            const doc1 = doc(db, "user", data.user.uid);
-            const snap = await updateDoc(doc1, {
-              notificationId: arrayUnion(notificationId),
-            }); 
-            console.log(data)
-          })
-          .catch((error) => {
-            if ((error.code = "auth/wrong-password")) {
-              setShowAlert(true);
-              setEmail("");
-              setPassword("");
-            }
-          }); 
+      signIn(email, password)
+        .then(async (data) => {
+          const doc1 = doc(db, "user", data.user.uid);
+          const snap = await updateDoc(doc1, {
+            notificationId: arrayUnion(notificationId),
+          });
+          console.log(data);
+        })
+        .catch((error) => {
+          if ((error.code = "auth/wrong-password")) {
+            setShowAlert(true);
+            setEmail("");
+            setPassword("");
+          }
+        });
     }
     setLoading(false);
   };
 
-  const signInWithGoogle = () => {};
+  const googleSignIn = () => {
+    signInWithGoogle() 
+  };
+
   return (
     <>
       {loading ? (
@@ -240,7 +241,7 @@ const Login = ({ navigation }) => {
                 <View className="border border-b-0 border-gray-200 mx-20"></View>
                 <View className="flex-1 flex flex-col">
                   <TouchableOpacity
-                    onPress={() => signInWithGoogle()}
+                    onPress={googleSignIn}
                     className="flex-row px-10 my-1 py-3 border border-gray-200 rounded-xl mt-0"
                   >
                     <Icon

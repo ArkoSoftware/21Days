@@ -3,7 +3,14 @@
     "name": "App",
     "slug": "App",
     "plugins": [
-      "@react-native-google-signin/google-signin"
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "999267741039987",
+          "clientToken": "9f4b2c52b014e42e768e46ceb9c2acff",
+          "displayName": "21Days"
+        }
+      ]
     ],
     "version": "1.0.0",
     "orientation": "portrait",
