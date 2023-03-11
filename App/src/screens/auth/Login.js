@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
   // GoogleSignin.configure({
   //   webClientId:'696569437747-3hum6ku5kmob5j3d9mdci5s30dkbsb0o.apps.googleusercontent.com'
   // })
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithFacebook } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [email, setEmail] = useState("");
@@ -67,10 +67,6 @@ const Login = ({ navigation }) => {
         });
     }
     setLoading(false);
-  };
-
-  const googleSignIn = () => {
-    signInWithGoogle() 
   };
 
   return (
@@ -241,7 +237,11 @@ const Login = ({ navigation }) => {
                 <View className="border border-b-0 border-gray-200 mx-20"></View>
                 <View className="flex-1 flex flex-col">
                   <TouchableOpacity
-                    onPress={googleSignIn}
+                    onPress={() =>
+                      signInWithFacebook()
+                        .then((res) => alert(res.data))
+                        .catch((err) => console.log(err))
+                    }
                     className="flex-row px-10 my-1 py-3 border border-gray-200 rounded-xl mt-0"
                   >
                     <Icon
