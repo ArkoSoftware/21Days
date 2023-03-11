@@ -36,6 +36,8 @@ const Login = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(true);
   const [notificationId, setNotificationId] = useState(null);
 
+  
+
   const SubmitForm = () => {
     setLoading(true);
     setEmailError(false);
@@ -55,7 +57,8 @@ const Login = ({ navigation }) => {
             const doc1 = doc(db, "user", data.user.uid);
             const snap = await updateDoc(doc1, {
               notificationId: arrayUnion(notificationId),
-            });
+            }); 
+            console.log(data)
           })
           .catch((error) => {
             if ((error.code = "auth/wrong-password")) {
@@ -63,21 +66,7 @@ const Login = ({ navigation }) => {
               setEmail("");
               setPassword("");
             }
-          });
-      // await signInWithEmailAndPassword(auth, email, password)
-      //   .then(async (data) => {
-      //     const doc1 = doc(db, "user", data.user.uid);
-      //     const snap = await updateDoc(doc1, {
-      //       notificationId: arrayUnion(notificationId),
-      //     });
-      //   })
-      //   .catch((error) => {
-      //     if ((error.code = "auth/wrong-password")) {
-      //       setShowAlert(true);
-      //       setEmail("");
-      //       setPassword("");
-      //     }
-      //   });
+          }); 
     }
     setLoading(false);
   };
