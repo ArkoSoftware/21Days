@@ -1,0 +1,116 @@
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+  TextInput,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from "react-native-vector-icons/Ionicons";
+import { auth } from "../../security/firebase";
+const GroupPage = () => {
+  const [postText, setPostText] = useState("");
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState("");
+  return (
+    <SafeAreaView className="flex-1 bg-white">
+      <ScrollView>
+        <ImageBackground
+          source={{
+            uri: "https://media.istockphoto.com/id/1327244548/photo/microphone-with-neon-light.jpg?b=1&s=170667a&w=0&k=20&c=SFeI5SrhKsfE674Tmy7wf8VtQLTtsgr6VHWP7dLICYo=",
+          }}
+          className="h-54 h-56 w-full"
+        >
+          <TouchableOpacity
+            className="p-2 rounded-full bg-white absolute top-4 left-4"
+            style={{ alignSelf: "flex-start" }}
+          >
+            <Icon name="chevron-back" color={"#000"} size={17} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="p-2 rounded-full bg-white absolute top-4 right-4"
+            style={{ alignSelf: "flex-start" }}
+          >
+            <Icon name="ellipsis-vertical-outline" color={"#000"} size={17} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            className="p-2 rounded-full bg-white absolute top-16 right-4"
+            style={{ alignSelf: "flex-start" }}
+          >
+            <Icon name="notifications-outline" color={"#000"} size={17} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            className="p-2 rounded-full bg-white absolute bottom-4 right-4 flex flex-row space-x-2 px-4"
+            style={{ alignSelf: "flex-start" }}
+          >
+            <Icon name="people-outline" color={"#000"} size={14} />
+            <Text className={"text-gray-700 my-auto"} style={{ fontSize: 13 }}>
+              202
+            </Text>
+          </TouchableOpacity>
+
+          <View
+            className="bg-white p-1 rounded-full mx-auto my-auto"
+            style={{ alignSelf: "flex-start" }}
+          >
+            <Image
+              source={{
+                uri: "https://www.forbes.com/advisor/wp-content/uploads/2022/06/Image_-_Podcast_.jpeg.jpg",
+              }}
+              className="w-28 h-28 rounded-full"
+            />
+          </View>
+        </ImageBackground>
+
+        <View className="p-5">
+          <View className="flex flex-row">
+            <Text className="font-extrabold tracking-tighter text-2xl">
+              John's Podcast
+            </Text>
+            <Icon
+              name="checkmark-circle"
+              size={14}
+              color="#2FA4F7"
+              style={{ marginLeft: 3 }}
+            />
+          </View>
+          <Text
+            className="tracking-tighter text-sm text-gray-500 mt-2"
+            style={{ fontSize: 13 }}
+          >
+            At John's Podcast we love to talk about fitness and workout routines
+            and building habits supporting life.
+          </Text>
+          <TouchableOpacity
+            className="p-3 rounded-full flex flex-row space-x-2 mt-5"
+            style={{ backgroundColor: "#3880FF" }}
+          >
+            <Text className="font-bold my-auto tracking-tight text-white mx-auto">
+              Follow
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View className=" ">
+          <View className=" mt-10">
+            <Icon
+              name="compass"
+              color={"#bfbfbf"}
+              size={100}
+              style={{ marginLeft: "auto", marginRight: "auto" }}
+            />
+            <Text className="text-xl font-bold tracking-tighter text-gray-400 text-center">
+              Private Account
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default GroupPage;

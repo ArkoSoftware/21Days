@@ -1,0 +1,79 @@
+
+        <View className="bg-white flex flex-col px-5 pb-5 mt-7">
+        <View className="flex flex-row space-x-3">
+          <Image
+            source={{ uri: auth.currentUser.photoURL }}
+            className="w-10 h-10 rounded-full my-auto"
+          />
+          <View className="border border-gray-300 px-3 py-2 rounded-xl flex-1 flex flex-row">
+            <TextInput
+              placeholder="What's on your mind?"
+              value={postText}
+              editable={!loading}
+              multiline
+              numberOfLines={2}
+            />
+            {image == "" ? (
+              <TouchableOpacity
+                activeOpacity={0.9}
+                className="my-auto ml-auto bg-blue-600 p-2"
+                style={{ borderRadius: 7 }}
+              >
+                <Icon name="image-outline" color="#fff" size={18} />
+              </TouchableOpacity>
+            ) : (
+              <View className="flex flex-row ml-auto">
+                <TouchableOpacity
+                  activeOpacity={0.9}
+                  className="my-auto ml-auto bg-blue-600"
+                  style={{ borderRadius: 7 }}
+                >
+                  <Image
+                    source={{ uri: image }}
+                    className="h-8 w-8"
+                    style={{ borderRadius: 7 }}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setImage("")}
+                  activeOpacity={0.9}
+                  className="my-auto ml-2"
+                  style={{ borderRadius: 7 }}
+                >
+                  <Icon
+                    name="close-circle-outline"
+                    color="#9f9f9f"
+                    size={22}
+                  />
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+          <View>
+            <TouchableOpacity
+              className="bg-blue-600 rounded-xl flex-1"
+              style={{ padding: 16, alignSelf: "flex-start" }}
+            >
+              {loading ? (
+                <ActivityIndicator
+                  size={16}
+                  color="#fff"
+                  className="mx-auto my-auto"
+                />
+              ) : (
+                <Icon
+                  name="paper-plane-outline"
+                  size={16}
+                  color="#fff"
+                  style={{
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                  }}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>

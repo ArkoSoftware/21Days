@@ -1,0 +1,49 @@
+<View className=" bg-white" style={{ flex: 1 }}>
+            <View className="flex flex-row p-4">
+              <Text
+                className="font-medium text-gray-700"
+                style={{ fontSize: 17, fontFamily: "font1" }}
+              >
+                Followers
+              </Text>
+              <TouchableOpacity className="ml-auto">
+                <Text
+                  className="font-medium text-blue-500"
+                  style={{ fontSize: 17, fontFamily: "font1" }}
+                >
+                  View All
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View className="pb-5">
+              <ScrollView
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
+                className="px-4 space-x-5"
+              >
+                <View className="w-18">
+                  <Image className="h-16 w-16 rounded-full mx-auto" />
+                  <Text className="text-center mt-1">Isaiah</Text>
+                </View>
+                <View className="w-18">
+                  <Image className="h-16 w-16 rounded-full mx-auto" />
+                  <Text className="text-center mt-1">Isaiah</Text>
+                </View>
+                <View className="w-18">
+                  <Image className="h-16 w-16 rounded-full mx-auto" />
+                  <Text className="text-center mt-1">Isaiah</Text>
+                </View>
+                <View className="w-18">
+                  <Image className="h-16 w-16 rounded-full mx-auto" />
+                  <Text className="text-center mt-1">Isaiah</Text>
+                </View>
+                <View className="w-18">
+                  <Image className="h-16 w-16 rounded-full mx-auto" />
+                  <Text className="text-center mt-1">Isaiah</Text>
+                </View>
+              </ScrollView>
+            </View>
+            <View className="">
+              <View className="bg-gray-200 p-1"></View>
+            </View>
+          </View>
