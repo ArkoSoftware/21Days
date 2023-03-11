@@ -6,25 +6,27 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
 import { auth, db } from "../../security/firebase";
 import Loading from "../../components/Loading";
 import { FancyAlert } from "react-native-expo-fancy-alerts";
 import { MAIN_COLOR } from "../../color";
-import { signInWithEmailAndPassword } from "firebase/auth";
+// import { signInWithEmailAndPassword } from "firebase/auth";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore/lite";
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
+import { AuthContext } from "../../contexts/AuthProvider";
+// import {
+//   GoogleSignin,
+//   GoogleSigninButton,
+//   statusCodes,
+// } from '@react-native-google-signin/google-signin';
 
 const Login = ({ navigation }) => {
-  GoogleSignin.configure({
-    webClientId:'696569437747-3hum6ku5kmob5j3d9mdci5s30dkbsb0o.apps.googleusercontent.com'
-  })
+  // GoogleSignin.configure({
+  //   webClientId:'696569437747-3hum6ku5kmob5j3d9mdci5s30dkbsb0o.apps.googleusercontent.com'
+  // })
+  const { signIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [email, setEmail] = useState("");
@@ -34,7 +36,7 @@ const Login = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(true);
   const [notificationId, setNotificationId] = useState(null);
 
-  const SubmitForm = async () => {
+  const SubmitForm = () => {
     setLoading(true);
     setEmailError(false);
     setPasswordError(false);
@@ -48,20 +50,34 @@ const Login = ({ navigation }) => {
         return;
       }
     } else {
-      await signInWithEmailAndPassword(auth, email, password)
-        .then(async (data) => {
-          const doc1 = doc(db, "user", data.user.uid);
-          const snap = await updateDoc(doc1, {
-            notificationId: arrayUnion(notificationId),
+      signIn(email,password)
+      .then(async (data) => {
+            const doc1 = doc(db, "user", data.user.uid);
+            const snap = await updateDoc(doc1, {
+              notificationId: arrayUnion(notificationId),
+            });
+          })
+          .catch((error) => {
+            if ((error.code = "auth/wrong-password")) {
+              setShowAlert(true);
+              setEmail("");
+              setPassword("");
+            }
           });
-        })
-        .catch((error) => {
-          if ((error.code = "auth/wrong-password")) {
-            setShowAlert(true);
-            setEmail("");
-            setPassword("");
-          }
-        });
+      // await signInWithEmailAndPassword(auth, email, password)
+      //   .then(async (data) => {
+      //     const doc1 = doc(db, "user", data.user.uid);
+      //     const snap = await updateDoc(doc1, {
+      //       notificationId: arrayUnion(notificationId),
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     if ((error.code = "auth/wrong-password")) {
+      //       setShowAlert(true);
+      //       setEmail("");
+      //       setPassword("");
+      //     }
+      //   });
     }
     setLoading(false);
   };
