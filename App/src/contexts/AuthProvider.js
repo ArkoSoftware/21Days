@@ -14,7 +14,7 @@ import auth from '@react-native-firebase/auth';
 export const AuthContext = createContext(); 
 
 const AuthProvider = ({ children }) => {
-  const googleProvider = new GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider(); 
 
   const signInWithFacebook = async () => { 
     const result = await LoginManager.logInWithPermissions([
